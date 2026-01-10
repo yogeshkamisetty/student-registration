@@ -45,18 +45,44 @@ LayerTechnologyFrontendHTML, CSS, JavaScriptBackendNode.js, ExpressDatabaseMySQL
 
 **System Architecture**
 -----------------------
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   Student Page (HTML)          ↓   JavaScript (fetch API)          ↓   Node.js + Express Server          ↓   MySQL Database          ↑   Admin Panel (HTML + JS)   `
+   Student Page (HTML)        
+   ↓
+   JavaScript (fetch API)   
+   ↓
+   Node.js + Express Server    
+   ↓
+   MySQL Database    
+   ↑
+   Admin Panel (HTML + JS)
 
 **Project Structure**
 ---------------------
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   student/  │  ├── server.js  ├── package.json  ├── node_modules/  └── public/       ├── index.html   (Student Registration Page)       └── admin.html   (Admin Dashboard)   `
+student/
+│
+├── server.js  
+├── package.json  
+├── node_modules/  
+    └── public/       
+        ├── index.html   (Student Registration Page)       
+        └── admin.html   (Admin Dashboard)
 
 **Database Structure**
 ----------------------
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   students (      id INT PRIMARY KEY AUTO_INCREMENT,      roll VARCHAR(50),      firstname VARCHAR(50),      lastname VARCHAR(50),      father_name VARCHAR(100),      dob VARCHAR(20),      mobile VARCHAR(20),      email VARCHAR(100),      gender VARCHAR(10),      department VARCHAR(100),      course VARCHAR(100),      city VARCHAR(50),      address TEXT  )   `
+students (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    roll VARCHAR(50),
+    firstname VARCHAR(50),
+    lastname VARCHAR(50),
+    father_name VARCHAR(100),
+    dob VARCHAR(20),
+    mobile VARCHAR(20),
+    email VARCHAR(100),
+    gender VARCHAR(10),
+    department VARCHAR(100),
+    course VARCHAR(100),
+    city VARCHAR(50),
+    address TEXT
+)
 
 **API Endpoints**
 -----------------
@@ -67,20 +93,17 @@ MethodEndpointDescriptionPOST/registerAdd new studentGET/usersGet all studentsDE
 ----------------------
 
 ### 1\. Install Dependencies
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   npm install   `
+ npm install 
 
 ### 2\. Start MySQL and create database
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   CREATE DATABASE studentdb;  USE studentdb;  -- Create students table (see above)   `
+ CREATE DATABASE studentdb;  USE studentdb;  -- Create students table (see above)
 
 ### 3\. Start Server
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   node server.js   `
+  node server.js 
 
 ### 4\. Open in Browser
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   http://localhost:3000        → Student Page  http://localhost:3000/admin.html  → Admin Panel   `
+ http://localhost:3000        → Student Page  http://localhost:3000/admin.html  → Admin Panel 
 
 **What This Project Demonstrates**
 ----------------------------------

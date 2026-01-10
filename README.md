@@ -136,4 +136,5 @@ MethodEndpointDescriptionPOST/registerAdd new studentGET/usersGet all studentsDE
 **Author**
 ----------
 
-Built by **Yogesh Kamisetty,**B.Tech (CSE).
+Built by **Yogesh Kamisetty,**
+B.Tech (CSE).

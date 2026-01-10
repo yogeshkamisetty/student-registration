@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head><title>Student Registration Form</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <br>
+        <br>
+<button  id="home" onclick="location.href='index.html'">Home</button>   
+        <center>
+        <h1><u>Student Registration Form</u></h1>
+        <hr>
+        <br>
+        <form id="regForm">
+            <table>
+                <tr>
+                    <th align="left">Roll No. :</th>
+                    <td><input type="text" name="roll" size="56" placeholder="25765XXXX"></td>
+                </tr>
+                <tr>
+                    <th align="left">Student Name :</th>
+                    <td>
+                        <input type="text" name="firstname" size="25" placeholder="First Name">
+                        <input type="text" name="lastname" size="25" placeholder="Last Name">
+                    </td>
+                </tr>
+                <tr>
+                    <th align="left">Father's Name:</th>
+                    <td><input type="text" size="56" name="father_name"></td>
+                </tr>
+                <tr>
+                    <th align="left">Date of Birth:</th>
+                    <td>
+                        <input type="text" name="dob" placeholder="DD-MM-YYYY" size="20">
+                    </td>
+                </tr>
+                <tr>
+                    <th align="left">Mobile No.:</th>
+                    <td>
+                        <input type="text" name="mobile" size="3" value="+91">
+                        <input type="text" name="mobile_rest" size="10" placeholder="8345XXXXXX">
+                    </td>
+                </tr>
+                <tr>
+                    <th align="left">Email:</th>
+                    <td><input type="email" name="email" size="56" placeholder="student@example.com"></td>
+                </tr>
+                <tr>
+                    <th align="left">Gender:</th>
+                    <td>
+                        <label><input type="radio" name="gender" value="Male"> Male</label>
+                        <label><input type="radio" name="gender" value="Female"> Female</label>
+                        <label><input type="radio" name="gender" value="Other"> Other</label>
+                    </td>
+                </tr>
+                <tr>
+                    <th align="left">Department:</th>
+                    <td>
+                        <label><input type="radio" name="department" value="CSE"> CSE</label>
+                        <label><input type="radio" name="department" value="IT"> IT</label>
+                        <label><input type="radio" name="department" value="ECE"> ECE</label>
+                        <label><input type="radio" name="department" value="Civil"> Civil</label>
+                        <label><input type="radio" name="department" value="Mech"> Mech</label>
+                    </td>
+                </tr>
+                <tr>
+                    <th align="left">Course:</th>
+                    <td>
+                        <select name="course">
+                            <option value="">----- Select Current Course -----</option>
+                            <option value="C">C</option>
+                            <option value="Java">Java</option>
+                            <option value="Python">Python</option>
+                            <option value="Full Stack Web Development">Full Stack Web Development</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th align="left">Student photo:</th>
+                    <td><input type="file" name="photo"></td>
+                </tr>
+                <tr>
+                    <th align="left">City:</th>
+                    <td><input type="text" name="city" placeholder="Place" size="56"></td>
+                </tr>
+                <tr>
+                    <th align="left">Address:</th>
+                    <td>
+                        <textarea name="address" rows="4" cols="56"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2">
+                        <input type="submit" value="Register">
+                        <input type="reset" value="Clear">
+                    </th>
+                </tr>
+            </table>
+        </form>
+        <br>
+        <hr>
+        </center>
+    <script>
+            async function submitForm(e){
+                e.preventDefault();
+                const form = document.getElementById('regForm');
+                const fd = new FormData(form);
+                const obj = {};
+                fd.forEach((v,k)=>{
+                    if(obj[k]){
+                        if(Array.isArray(obj[k])) obj[k].push(v);
+                        else obj[k]=[obj[k],v];
+                    } else obj[k]=v;
+                });
+                if(obj.mobile_rest) obj.mobile = (obj.mobile||'') + obj.mobile_rest;
+                try{
+                    const res = await fetch('/register', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(obj)
+                    });
+                    if(res.ok){
+                        alert('Registered successfully');
+                        form.reset();
+                        loadUsers();
+                    } else {
+                        const txt = await res.text();
+                        alert('Error: ' + txt);
+                    }
+                }catch(err){
+                    alert('Request failed: ' + err.message);
+                }
+            }
+
+            async function loadUsers(){
+                try{
+                    const res = await fetch('/users');
+                    if(!res.ok) return;
+                    const users = await res.json();
+                    const container = document.getElementById('users');
+                    if(!users || users.length===0){ container.innerHTML = '<p>No registrations yet.</p>'; return; }
+                    let html = '<h2>Registered Students</h2><table border="1" cellpadding="6"><tr><th>ID</th><th>Roll</th><th>Name</th><th>Email</th><th>Gender</th><th>Course</th><th>City</th></tr>';
+                    users.forEach(u=>{
+                        html += `<tr><td>${u.id}</td><td>${u.roll||''}</td><td>${(u.firstname||'') + ' ' + (u.lastname||'')}</td><td>${u.email||''}</td><td>${u.gender||''}</td><td>${u.course||''}</td><td>${u.city||''}</td></tr>`;
+                    });
+                    html += '</table>';
+                    container.innerHTML = html;
+                }catch(err){ console.error(err); }
+            }
+
+            document.getElementById('regForm').addEventListener('submit', submitForm);
+            window.addEventListener('load', loadUsers);
+    </script>
+    </body>
+</html>

@@ -17,7 +17,7 @@ app.use(session({
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "Yogi@2534",        // if your MySQL has a password, put it here
+    password: "**********",        // if your MySQL has a password, put it here
     database: "studentdb"
 });
 

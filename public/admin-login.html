@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="admin-login-style.css">
+</head>
+<body>
+    <center>
+        <form id="loginForm">
+           <div class="container">
+                    <h1 style="color: rgb(96, 87, 183); border: 1px solid rgb(96, 87, 183); box-shadow: 1px 3px 1px 1px rgba(0, 0, 0.05); padding: 10px; border-radius: 10px; margin-top: 0.3em;"><b>Admin Login</b></h1>
+            <br><br>
+            <label for="username"><b>Username:</b></label>
+            <input type="text" id="username" name="username" required>
+            <br><br>
+            <label for="password"><b>Password:</b></label>
+            <input type="password" id="password" name="password" required><br><br>
+            <button type="submit" id="btn"><b>Login</b></button>
+            </div>
+        </form>
+    </center>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const form = new FormData(this);
+            const data={
+                username: form.get('username'),
+                password: form.get('password')
+            };
+            if(!data.username || !data.password){
+                alert('Please fill all fields');
+                return;
+            }
+            const obj = {
+                username: data.username,
+                password: data.password
+            };
+            const res = await fetch('/admin/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            if (res.ok) {
+                alert('Login successful');
+                window.location.href = 'admin.html'; // Redirect to admin dashboard
+            } else {
+                alert('Login failed - Invalid credentials');
+            }
+        });
+    </script>
+</body>
+</html>

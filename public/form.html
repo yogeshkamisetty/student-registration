@@ -3,7 +3,7 @@
     <head><title>Student Registration Form</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stu-reg-style.css">
     </head>
     <body>
         <br>
@@ -108,13 +108,50 @@
                 const form = document.getElementById('regForm');
                 const fd = new FormData(form);
                 const obj = {};
+                
                 fd.forEach((v,k)=>{
                     if(obj[k]){
                         if(Array.isArray(obj[k])) obj[k].push(v);
                         else obj[k]=[obj[k],v];
                     } else obj[k]=v;
                 });
+
                 if(obj.mobile_rest) obj.mobile = (obj.mobile||'') + obj.mobile_rest;
+                
+                if(!obj.roll  || obj.roll.length<0) {
+                    alert('Roll No. is required');
+                    return;
+                }
+
+                if(!obj.firstname || !obj.lastname) {
+                    alert('Name is required');
+                    return;
+                }
+                if(!obj.email || !obj.email.includes('@')) {
+                    alert('Valid Email is required');
+                    return;
+                }
+                if(!obj.gender) {
+                    alert('Gender is required');
+                    return;
+                }
+                if(!obj.department) {
+                    alert('Department is required');
+                    return;
+                }
+                if(!obj.course) {
+                    alert('Course is required');
+                    return;
+                }
+                if(!obj.city) {
+                    alert('City is required');
+                    return;
+                }
+                if(!obj.mobile_rest || obj.mobile_rest.length<10) {
+                    alert('Valid Mobile No. is required');
+                    return;
+                }
+                
                 try{
                     const res = await fetch('/register', {
                         method: 'POST',

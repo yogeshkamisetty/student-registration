@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const session = require("express-session");
 const express = require("express");
 const mysql = require("mysql2");
@@ -15,10 +17,10 @@ app.use(session({
 }))
 
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "**********",        // if your MySQL has a password, put it here
-    database: "studentdb"
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME
 });
 
 db.connect(err => {

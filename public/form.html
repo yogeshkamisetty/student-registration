@@ -124,7 +124,7 @@
 
                 if(obj.mobile_rest) obj.mobile = (obj.mobile||'') + obj.mobile_rest;
                 
-                if(!obj.roll  || obj.roll.length<0) {
+                if(!obj.roll  || obj.roll.length<3) {
                     alert('Roll No. is required');
                     return;
                 }
@@ -153,7 +153,7 @@
                     alert('City is required');
                     return;
                 }
-                if(!obj.mobile_rest || obj.mobile_rest.length<10) {
+                if(!obj.mobile || obj.mobile.length<10) {
                     alert('Valid Mobile No. is required');
                     return;
                 }
@@ -177,24 +177,7 @@
                 }
             }
 
-            async function loadUsers(){
-                try{
-                    const res = await fetch('/users');
-                    if(!res.ok) return;
-                    const users = await res.json();
-                    const container = document.getElementById('users');
-                    if(!users || users.length===0){ container.innerHTML = '<p>No registrations yet.</p>'; return; }
-                    let html = '<h2>Registered Students</h2><table border="1" cellpadding="6"><tr><th>ID</th><th>Roll</th><th>Name</th><th>Email</th><th>Gender</th><th>Course</th><th>City</th></tr>';
-                    users.forEach(u=>{
-                        html += `<tr><td>${u.id}</td><td>${u.roll||''}</td><td>${(u.firstname||'') + ' ' + (u.lastname||'')}</td><td>${u.email||''}</td><td>${u.gender||''}</td><td>${u.course||''}</td><td>${u.city||''}</td></tr>`;
-                    });
-                    html += '</table>';
-                    container.innerHTML = html;
-                }catch(err){ console.error(err); }
-            }
-
             document.getElementById('regForm').addEventListener('submit', submitForm);
-            window.addEventListener('load', loadUsers);
     </script>
     </body>
 </html>

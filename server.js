@@ -79,7 +79,7 @@ function insertStudent(s, res) {
         s.mobile,
         s.email,
         s.gender,
-        Array.isArray(s.department) ? s.department.join(",") : s.department,
+        s.department,
         s.course,
         s.city,
         s.address
